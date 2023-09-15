@@ -1,0 +1,667 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="学习之旅" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="学习之旅" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="学习之旅" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="二进制安全，数据流攻击" />
+
+
+<link rel="canonical" href="http://example.com/2023/09/08/flowstitch/">
+
+
+
+  <title>
+flowstitch - DOP |
+Yume Shoka = 学习之旅 = Learning journey</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">flowstitch
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2023-09-08 15:15:49">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-09-08T15:15:49+08:00">2023-09-08</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Yume Shoka</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclfb3vzhj20zk0m8wny.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeuv80yoj20zk0m8kjl.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeybxm1pj20zk0m8niv.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciuv0socj20zk0m8qes.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclh0m9pdj20zk0m8hdt.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/DOP/" itemprop="item" rel="index" title="分类于 DOP"><span itemprop="name">DOP</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/flowstitch/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Tianyu Luo">
+    <meta itemprop="description" content="Learning journey, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="学习之旅">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="automatic-generation-of-data-oriented-exploits"><a class="markdownIt-Anchor" href="#automatic-generation-of-data-oriented-exploits">#</a> Automatic Generation of Data-Oriented Exploits</h1>
+<h2 id="abstract"><a class="markdownIt-Anchor" href="#abstract">#</a> Abstract</h2>
+<p>​		本文开发了一种称为数据流缝合的新技术，该技术系统地找到了将程序中的数据流连接起来以生成面向数据的漏洞利用的方法，并在一个名为 FLOWSTITCH 的工具中构建了一个原型，该工具直接在 Windows 和 Linux 二进制文件上工作。实验中发现 FLOWSTITCH 自动从八个现实世界的脆弱程序中构建了 16 个未知的和 3 个已知的面向数据的攻击。所有自动生成的漏洞利用都尊重细粒度的 CFI 和 DEP 约束，并且 19 个漏洞中有 10 个在启用标准 ASLR 防御的情况下依然工作。构建的漏洞利用可能造成重大损害，例如泄露敏感信息 (例如密码和加密密钥) 和特权升级。</p>
+<h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction">#</a> Introduction</h2>
+<p>​		面向控制的攻击，包括代码注入和代码重用攻击，可以通过有效的防御机制，如控制流完整性 (CFI）、数据执行预防 (DEP) 和地址空间布局随机化 (ASLR) 来阻止。</p>
+<p>​		内存错误还可以通过破坏非控制数据来实现攻击，在 Internet Explorer (IE) 10 上最近的一次漏洞利用中，已经证明改变单个字节 —— 特别是安全模式标志 —— 足以在 IE 进程中运行任意代码。心脏出血漏洞是另一个例子，其中启用 ssl 的服务器中的敏感数据可以在不劫持应用程序的控制流的情况下泄露。</p>
+<p>​		然而，大多数已知的攻击都是对非控制数据的直接破坏。目前还没有系统的方法来识别和构建这些利用内存错误的漏洞，以证明面向数据的攻击的力量。在这项工作中，我们研究了从给定的内存损坏缺陷自动构建面向数据的漏洞的系统技术。</p>
+<p><strong>挑战：</strong></p>
+<ul>
+<li>尽管典型程序的内存空间中有大量的非控制数据，但由于内存损坏的可能性很大，并且它们对程序内存状态的影响很微妙，因此很难确定如何损坏内存值以成功利用。</li>
+<li>如何在内存状态的大空间中搜索，从而造成意想不到的数据攻击，比如信息泄露或特权升级。</li>
+<li>ASLR 这样的防御会随机化地址，使其更加困难，因为绝对地址值不能用于利用有效负载</li>
+</ul>
+<p><strong>方法</strong>：通过数据流缝合构建面向数据的漏洞利用</p>
+<ul>
+<li>优先搜索需要单个新边或少量新边的数据流缝合</li>
+<li>开发了一些技术来解决内存布局知识有限所带来的挑战</li>
+<li>对新的数据流路径使用符号执行进行路径建模，通过 SMT 求解器验证可行性</li>
+<li>构建了工具 FLOWSTITCH 来体现上面这些方法，它直接在 x86 二进制文件上运行。FLOWSTITCH 将具有内存错误的易受攻击的程序、利用内存错误的输入以及对该程序的良性输入作为输入。它采用动态二进制分析构造信息流图，高效地搜索待缝合的数据流。FLOWSTITCH 输出一个面向数据的漏洞利用，泄漏或篡改敏感数据。</li>
+</ul>
+<p><strong>结果：</strong></p>
+<p>​		大多数已知的面向数据的攻击是直接的非控制数据损坏攻击，最多需要一个数据流边。相比之下，我们构建的七个漏洞利用只有在数据流图中添加多个数据流边时才可行，这显示了我们的自动构建技术的有效性。</p>
+<p><strong>贡献：</strong></p>
+<ul>
+<li>我们将数据流缝合概念化，并开发了一种新的方法，通过内存错误在应用程序中组合良性数据流，使面向数据的攻击利用构造系统化。</li>
+<li>我们在一个名为 FLOWSTITCH 的自动面向数据的攻击生成工具中构建了我们方法的原型。FLOWSTITCH 直接在 Windows 和 Linux x86 二进制文件上运行。</li>
+<li>我们表明，从常见内存错误构建面向数据的攻击是可行的，并提供了一种有希望的方法来绕过许多防御机制来控制流攻击。具体来说，我们展示了 16 种以前未知的和 3 种已知的面向数据的攻击是可行的，这些攻击来自 8 个漏洞。我们所有构建的 19 个漏洞利用都绕过了 DEP 和 CFI 检查，其中 10 个绕过了 ASLR。</li>
+</ul>
+<h2 id="problem-definition"><a class="markdownIt-Anchor" href="#problem-definition">#</a> Problem Definition</h2>
+<h3 id="motivating-example"><a class="markdownIt-Anchor" href="#motivating-example">#</a> Motivating Example</h3>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230915155800005.png" alt="image-20230915155800005"></p>
+<p>函数功能：模仿 web server。它从文件中加载网站的私钥，并使用它与客户端建立 HTTPS 连接。在接收到输入 (文件名) 之后，代码通过调用 checkInput () 在第 10 行对输入进行判断。然后，代码检索文件内容并将内容和文件名发送回客户机。</p>
+<p>内存错误：在第 14 行有一个栈缓冲区溢出漏洞，通过该漏洞，客户端可以破坏 fullPath 缓冲区之后的栈内存</p>
+<p>面向数据的攻击：可以看到函数中有两条数据流，一个是由名为 privKey 的指针指向的涉及敏感私钥的数据流，另一个是由名为 reqFile 的指针指向的涉及输入文件名的数据流。在正常运行时，这两个数据流不会相交 —— 它们之间没有共享变量或直接的数据依赖关系，但是攻击者可以利用缓冲区溢出来破坏指针 reqFile，使其指向私钥。这迫使程序将私钥复制到第 16 行 sprintf 函数的输出缓冲区中，然后程序将输出缓冲区发送到第 17 行客户端。实现了将两个不相干的数据流缝合起来的效果。</p>
+<h3 id="objectives-threat-model"><a class="markdownIt-Anchor" href="#objectives-threat-model">#</a> Objectives &amp; Threat Model</h3>
+<ul>
+<li>
+<p>目标 1：信息泄露</p>
+<ul>
+<li>密码和私钥：有助于绕过身份验证控制并破坏由加密技术建立的安全通道。</li>
+<li>随机值：一些内存保护防御利用程序在运行时生成的随机值，例如 stack canaries、enforcing tags, and randomized addresses。这些信息的泄露允许攻击者绕过基于随机的防御。</li>
+</ul>
+</li>
+<li>
+<p>目标 2：权限提升</p>
+<ul>
+<li>系统调用参数：如 setuid ()，损坏系统调用参数可能导致权限提升。</li>
+<li>配置设置：</li>
+<li>程序配置数据，特别是服务器程序 (例如，从 Apache 服务器的 httpd.conf 加载的数据) 指定关键信息，例如用户权限和 web 服务器的根目录。破坏这些数据会直接升级特权。</li>
+</ul>
+</li>
+<li>
+<p>威胁模型</p>
+<p>​        我们假设执行环境已经部署了针对控制流劫持攻击的防御机制，例如细粒度的 CFI、不可执行数据和最先进的 ASLR 实现。因此，攻击者无法进行控制流劫持攻击。所有不确定的系统生成的值，例如 stack-canaries 或 CFI tags，都被认为是秘密的，对攻击者来说是未知的。</p>
+</li>
+</ul>
+<h3 id="problem-definition-2"><a class="markdownIt-Anchor" href="#problem-definition-2">#</a> Problem Definition</h3>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230904173140771.png" alt="image-20230904173140771"></p>
+<p>​		为了系统地构建面向数据的攻击，我们引入了一种新的抽象，称为二维数据流图 (2D-DFG)，它在两个维度上表示给定程序执行中的数据流：内存地址和执行时间。具体来说，2D-DFG 是一个有向图，表示为 G = {V,E}，其中 V 是顶点的集合，E 是边的集合。V 中的一个顶点是一个变量实例，即二维地址时间空间中的一个点，记为 (A,t)，其中 A 是变量的地址，t 是创建变量实例时执行时间的表示。地址包括内存地址和寄存器名，执行时间表示为程序执行跟踪中的指令计数器。一条边 (v1，v2) 表示顶点 v1 和顶点 v2 在执行过程中创建的数据依赖关系，即 v2 的值或 v2 的地址是从 v1 的值派生出来的。因此，2D-DFG 也体现了指针变量与被指向变量之间的 “指向” 关系。每个顶点 v 都有一个值属性，记为 v.value</p>
+<p><strong>数据流缝合的核心问题定义如下</strong>：</p>
+<p>​		对于存在内存错误的程序，我们采用以下参数作为输入：程序良性执行的 2D-DFG G，内存错误影响 I，以及两个顶点 Vs (源) 和 Vt (目标)。在 motivating example 中，Vs 是私钥缓冲区（privKey）,Vt 是公共输出缓冲区（output），我们的目标是生成一个新的 2D-DFG G1= {V1，E1}， V1 和 E1 是由于内存错误利用而生成，G1 包含从 Vs 到 Vt 的数据流路径。令 E2 = E1−E 为边集差，且 V2= V1 − V 为顶点集之差。那么，E2 是我们需要生成的新边的集合.</p>
+<p>​		内存错误影响 I 是内存错误可以写入的内存位置的集合，表示为一组顶点。因此，我们必须选择 V2 作为 I 中顶点的子集。为了实现目标 1 (隐私泄露），我们将携带程序秘密的变量视为源顶点，将写入公共输出的变量视为目标顶点。在针对目标 2（权限提升）的攻击开发中，源顶点是攻击者控制的变量，目标顶点是安全关键变量，如系统调用参数。成功的面向数据的攻击还应满足以下关键要求:</p>
+<ul>
+<li>exploit 输入满足程序路径约束以到达内存错误，创建新边并继续执行以到达创建 Vt 的指令。</li>
+<li>exploit 中执行的指令必须符合程序的静态控制流图。</li>
+</ul>
+<h3 id="key-technique-challenges"><a class="markdownIt-Anchor" href="#key-technique-challenges">#</a> Key Technique &amp; Challenges</h3>
+<p>​		数据流缝合的关键思想是高效地搜索新的数据流边集 E2，并将其加入到 G1 这样它就创建了从 Vs 到 Vt 的新的数据流路径。对于每条边 (x,y)∈E,2 x 是数据依赖于 Vs 的，Vt 是数据依赖于 y 的。我们将包含所有数据依赖于 Vs 的顶点的 G 的子图表示为源流。我们还表示包含 Vt 依赖于数据的所有顶点的 G 的子图作为目标流。对于每一对顶点 (x, y), 其中 x 是在源流中 y 是在目标流中，我们检查 (x, y) 是一个可行的 E2 的边通过判断 x 和 y 的顶点可以被直接包含在 I 中，或者通过 I 中指针的损坏通过一系列边连接，即如果我们改变写入 x 的地址或更改读取 y 的地址，x 的值将流向 y。如果是这样，我们称 (x, y) 为缝合边，x 为缝合源，y 为缝合目标。例如，在 motivating example 中，我们将文件名的指针 (在 I 中) 从 reqFile 更改为 privKey, 	然后就将私钥流和文件名流连接起来。在 2D-DFG 中寻找数据流缝合，我们面临以下挑战:</p>
+<ul>
+<li>缝合搜索空间大。真实程序中的 2D-DFG 具有许多数据流和大量顶点。例如，在一次 SSHD 攻击中，有 776 个源顶点和 56 个目标顶点。因此，寻找可行路径的搜索空间很大，因为我们经常需要进行大量分析来连接每对顶点。</li>
+<li>内存布局知识有限。大多数现代操作系统都默认启用了 ASLR。数据内存区域 (如栈和堆) 的基址是随机的，因此很难预测。</li>
+<li>复杂的程序路径约束。成功的面向数据的攻击会导致受害程序执行到内存错误，创建缝合边，并继续执行而不会崩溃。这要求输入满足所有路径约束，尊重程序的控制流完整性约束，并避免无效的内存访问。</li>
+</ul>
+<h2 id="data-flow-stitching"><a class="markdownIt-Anchor" href="#data-flow-stitching">#</a> Data flow Stitching</h2>
+<p>​		面向数据的利用可以通过多种不同的方式操纵数据流路径来缝合源顶点和目标顶点。解决方案空间可以根据漏洞添加的新边的数量进行分类。面向数据的漏洞利用的最简单情况是漏洞利用添加单个新边缘。当单边缝合不可行时，可以利用一系列损坏的值来设计更复杂的漏洞。</p>
+<h3 id="基础缝合技巧"><a class="markdownIt-Anchor" href="#基础缝合技巧">#</a> 基础缝合技巧</h3>
+<p>一种基本的面向数据的利用在新的边集 E2 中添加一条边来连接 Vs 和 Vt 。我们将这种情况称为单条边缝合。</p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230905184249388.png" alt="image-20230905184249388"></p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230905184304286.png" alt="image-20230905184304286"></p>
+<p>​		例如，攻击者可以通过覆盖安全关键数据值在内存损坏点创建单个新顶点，从而导致权限升级。之前已知的大多数面向数据的攻击都是单边缝合的情况。我们使用易受攻击的 Web 服务器 wu-ftpd 的示例，如代码 2 所示</p>
+<p>​		在此漏洞中，攻击者利用格式字符串漏洞（在第 5 行跳过）用 root 用户的 ID 覆盖安全关键的 pw-&gt;pw uid。随后第 9 行的 setuid 调用旨在删除进程权限，而是使程序保留其 root 用户权限。图 3 (a) 和图 3 (b) 分别显示了在良性负载和漏洞利用负载下执行易受攻击的代码片段的 2D-DFG。时间轴上的数字是代码 2 中的行号。</p>
+<p><strong>单边缝合思想</strong>：</p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230905184617994.png" alt="image-20230905184617994"></p>
+<p>​		我们提出了一种利用内存错误的影响集 I 来修剪搜索空间的方法，而不是对目标流中的所有顶点进行暴力破解。影响集 I 包含可能被内存错误破坏的顶点，如图 3 所示的灰色区域。对于目标流中的顶点，攻击者只能影响目标流与影响 I 相交处的顶点。其他顶点不会产生单边缝合，可以过滤掉。具体来说，这里主要利用了三个观察结果：</p>
+<ul>
+<li>寄存器顶点可以被忽略，因为内存错误利用不能破坏它们。</li>
+<li>顶点必须在内存错误之前定义（写入）并在内存错误之后使用（读取）。</li>
+<li>在内存地址维度中，顶点地址应该属于内存错误影响 I 的内存区域</li>
+</ul>
+<h3 id="高级缝合技巧"><a class="markdownIt-Anchor" href="#高级缝合技巧">#</a> 高级缝合技巧</h3>
+<p>多边缝合可以通过多种方式进行合成</p>
+<ul>
+<li>直观来说，通过多个单边缝合来创造一个多边缝合</li>
+<li>另一种方法是执行指针缝合，这会破坏稍后用作指向源或目标流中顶点的指针变量，同时还会增加两条边
+<ul>
+<li>一条边生成新的指向关系</li>
+<li>一条边用来改变数据流</li>
+</ul>
+</li>
+</ul>
+<p>同样以 Code2 中的 wu-ftpd 为例子，没有直接修改字段 pw_uid（单边缝合），而是将其基指针 pw 更改为在 pw_ uid 对应的偏移量处具有常量 0 的结构体的地址，这样就会多创建两条新边，一条灰色虚线将将损坏的指针连接到它指向的新变量，黑色虚线将新变量写入 setuid 参数，最终实现权限提升攻击，图 4 展示了良性执行和攻击执行的 2D-DFG。</p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230906094751046.png" alt="image-20230906094751046"></p>
+<p>多边缝合算法：</p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230906111727900.png" alt="image-20230906111727900"></p>
+<p>也可以采用多步指针缝合的方式，中间每步利用高级缝合技巧或者基本缝合技巧</p>
+<h3 id="对抗aslr"><a class="markdownIt-Anchor" href="#对抗aslr">#</a> 对抗 ASLR</h3>
+<ul>
+<li>缝合确定的内存地址。当前的 ASLR 实现只是将大部分数据留在确定性内存区域中，例如有些随机化的程序中有确定地址的.got.plt 和.bss 段。（案例 orzhttpd 即可通过改写版本字符串的指针为.got.plt 段的地址，从而可以泄露出其中的随机化地址，为第二阶段在随机化区域的重要数据泄露做准备）</li>
+<li>通过地址重用进行缝合
+<ul>
+<li>部分地址重用</li>
+<li>完全地址重用</li>
+</ul>
+</li>
+</ul>
+<p>下面是一个地址完全重用的案例：</p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230906153117870.png" alt="image-20230906153117870"></p>
+<p>​		在第 5 行执行 vfprintf () 时，用户身份变量 (ud.uid) 的地址存在于栈中。格式字符串为 “% X$n” 的 vfprintf () 函数使用堆栈上的第 X 个参数作为 “% n”。通过指定 X 的值，vfprintf () 可以从其祖先的栈帧中检索 ud.uid 的地址，并将 ud.uid 更改为根用户 ID，而无需知道堆栈基地址。</p>
+<h2 id="the-flowstitch-system"><a class="markdownIt-Anchor" href="#the-flowstitch-system">#</a> The FLOWSTITCH System</h2>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230906153453386.png" alt="image-20230906153453386"></p>
+<ul>
+<li>
+<p>功能 ：使用数据流缝合系统地生成面向数据的攻击。</p>
+</li>
+<li>
+<p>三个输入</p>
+<ul>
+<li>有内存错误的程序</li>
+<li>显示错误的输入</li>
+<li>程序的良性输入（这两个输入应驱动程序沿着相同的执行路径执行，直到内存错误指令，其中显示错误的输入会导致崩溃。这样的输入对可以通过工具 BAP 和 SAGE 找到）</li>
+</ul>
+</li>
+<li>
+<p>五个步骤：</p>
+<ul>
+<li>首先，它生成给定程序的执行跟踪。我们将具有良性输入的执行跟踪称为良性跟踪，将具有错误显示输入的执行跟踪称为错误显示跟踪。</li>
+<li>其次，FLOWSTITCH 从显示错误的跟踪中识别内存错误的影响，并对程序输入生成约束以达到内存错误。</li>
+<li>第三，FLOWSTITCH 使用良性跟踪执行数据流分析和安全敏感数据识别。</li>
+<li>第四，FLOWSTITCH 使用前面讨论的数据流缝合方法从已识别的安全敏感数据流中选择缝合候选。</li>
+<li>最后，FLOWSTITCH 检查使用内存错误创建新数据流边的可行性并验证漏洞利用。它最终输出发起面向数据的攻击的输入。</li>
+</ul>
+</li>
+</ul>
+<h3 id="内存错误影响分析有点抽象"><a class="markdownIt-Anchor" href="#内存错误影响分析有点抽象">#</a> 内存错误影响分析（有点抽象）</h3>
+<p>​		它识别内存错误影响的两个方面：执行过程中内存错误发生的时间（时间影响）和内存错误可写入的内存范围（空间影响）。从显示错误的跟踪中，FLOWSTITCH 检测其内存解引用地址源自错误显示输入的指令。我们将这些指令称为内存错误指令。请注意，在此类指令之前结束或在此类指令之后开始的数据流不会受到内存错误的影响，因此它们不受时间影响。</p>
+<p>​		攻击者可以通过内存错误指令访问非预期的内存位置。然而，该程序的逻辑限制了攻击者可访问的总内存范围。为了识别内存错误指令的空间影响，我们采用动态符号执行技术。我们从显示错误的跟踪中生成一个符号公式，其中所有输入都是符号变量，并且所有路径约束都被断言为真。满足该公式的输入意味着执行具有非预期地址的内存错误指令。满足这些约束并且可以在内存错误指令处解引用的地址集构成了空间影响</p>
+<h3 id="安全敏感数据识别"><a class="markdownIt-Anchor" href="#安全敏感数据识别">#</a> 安全敏感数据识别</h3>
+<p>FLOWSTITCH 综合了安全敏感数据流。有四种类型的数据需要缝合：</p>
+<ul>
+<li>输入数据：为了识别输入数据，FLOWSTITCH 在生成跟踪时执行污点分析，将给定输入视为外部污点源。</li>
+<li>输出数据：FLOWSTITCH 标识一组发送程序数据的程序接收器，如 send () 和 printf ()。接收器中使用的参数是输出数据。</li>
+<li>程序隐私信息和权限标志：分为两类：
+<ul>
+<li>程序特定数据：FLOWSTITCH 接受用户指定以查找程序特定数据。例如，用户可以提供安全标志的地址。</li>
+<li>通用数据：
+<ul>
+<li>系统调用参数。FLOWSTITCH 从跟踪中识别所有系统调用，例如 setuid、unlink。 FLOWSTITCH 根据系统调用约定收集系统调用参数。</li>
+<li>配置数据。为了识别配置数据，FLOWSTITCH 将配置文件视为污点源，并使用污点分析来跟踪配置数据的使用情况。</li>
+<li>随机数据。stack canary,   randomized addresses</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>​		确定性内存区域识别。 FLOWSTITCH 使用确定性地址识别缝合的确定性内存区域。它首先检查程序二进制文件以识别在运行时不会被随机化的内存区域。如果程序不是位置无关的，则二进制头中显示的所有数据部分都将位于确定性地址。 FLOWSTITCH 收集可加载部分并获取确定性内存集 D。FLOWSTITCH 进一步扫描良性跟踪以查找将数据写入确定性内存集的所有内存写入指令，以识别存储在该区域中的数据。</p>
+<p>​		根据安全敏感数据的功能，我们预先定义了攻击目标。例如，setuid 参数的攻击是将其更改为 root 用户的 id 0。对于 Web 服务器的主目录字符串，目标是将其设置为系统根目录。</p>
+<h3 id="缝合候选选择"><a class="markdownIt-Anchor" href="#缝合候选选择">#</a> 缝合候选选择</h3>
+<p>​		对于已识别的安全敏感数据，FLOWSTITCH 从 2D-DFG 生成其数据流。 FLOWSTITCH 选择源自源顶点 Vs 的源流和结束于目标顶点 Vt 的目标流。然后，它使用第 3 节中讨论的缝合方法来找到缝合解决方案。虽然此处可以使用任何缝合方法的组合，但 FLOWSTITCH 使用以下策略来有效地实现成功的缝合。</p>
+<ol>
+<li>
+<p>FLOWSTITCH 在多边缝合技术之前尝试单边缘缝合技术。单边缝合的搜索空间耗尽后，它会移动到多边缝合。在我们的实验中，FLOWSTITCH 在四边缝合处停止搜索。</p>
+</li>
+<li>
+<p>FLOWSTITCH 在通过地址重用进行缝合之前考虑具有确定性地址的缝合。在耗尽确定性地址和地址重用空间的搜索空间后，对于没有 ASLR 的情况，FLOWSTITCH 继续使用良性跟踪中显示的具体地址搜索缝合。</p>
+</li>
+</ol>
+<h3 id="候选过滤"><a class="markdownIt-Anchor" href="#候选过滤">#</a> 候选过滤</h3>
+<p>为了克服挑战 —— 复杂的程序路径约束，FLOWSTITCH 检查每个选定的候选缝合边的可行性。我们定义可缝合性约束来涵盖以下约束。</p>
+<ul>
+<li>到达内存错误指令的路径条件；</li>
+<li>继续到达目标流的路径条件；</li>
+<li>控制数据的完整性；</li>
+</ul>
+<p>​		FLOWSTITCH 使用符号执行工具生成可缝合性约束。约束作为输入发送到 SMT 求解器。如果求解器找不到任何满足约束的输入，FLOWSTITCH 将选择下一个候选缝合边缘。如果存在，输入将是见证输入，用于练习执行路径以展示面向数据的攻击。由于实现中符号约束生成的具体化，约束可能不完整，即，它可能允许导致不同路径的输入。 FLOWSTITCH 具体验证 SMT 求解器生成的输入，以检查它是否成功对程序发起面向数据的攻击。</p>
+<h2 id="具体实现"><a class="markdownIt-Anchor" href="#具体实现">#</a> 具体实现</h2>
+<p>​		我们在 Ubuntu 12.04 32 位系统上制作了 FLOWSTITCH 原型。请注意，作为第一步，跟踪生成工具可以在 Windows 和 Linux 系统上运行以生成跟踪。尽管以下分析步骤是在 Ubuntu 上执行的，但 FLOWSTITCH 适用于 Windows 和 Linux 二进制文件。</p>
+<ul>
+<li>
+<p>跟踪生成。我们的跟踪生成基于 BAP 提供的 Pintraces 工具。 Pintraces 是一个 Pin 工具，它使用动态二进制插桩来记录程序执行状态。它将程序执行的所有指令以及操作数信息记录到跟踪文件中。在我们的评估中，跟踪还包含动态污点信息，以方便提取数据流。</p>
+</li>
+<li>
+<p>数据流生成。对于输入数据和配置数据，FLOWSTITCH 使用污点信息来获取数据流。为了生成安全敏感数据的数据流，FLOWSTITCH 对良性跟踪执行向后和向前切片以定位所有相关指令。一条指令可以有多个源操作数。例如，在 add % eax, % ebx 中，目标操作数 % ebx 源自 % eax 和 % ebx。在这种情况下，一个顶点有多个父顶点。结果，生成的数据流是一个图，其中每个节点可能有多个父节点。</p>
+</li>
+<li>
+<p>约束生成和求解。 4. 中所需的可缝合性约束的生成分三个部分实现：路径约束、影响力约束和 CFI 约束。可缝合性约束被表示为这三个部分的逻辑与。</p>
+<p>我们使用 BAP 生成捕获路径条件和影响约束的公式。对于控制流完整性约束，我们实现了一个过程来搜索所有间接 jmp 或 ret 指令的跟踪。</p>
+<p>记录保存返回地址或间接跳转目标的内存位置。控制流完整性要求在运行时，包含控制数据的内存位置不应被内存错误破坏。使用 Z3 SMT 求解器 [22] 检查可缝合性约束的可满足性，当约束可满足时，它会生成见证输入。</p>
+</li>
+</ul>
+<h2 id="思考"><a class="markdownIt-Anchor" href="#思考">#</a> 思考</h2>
+<ol>
+<li>如何构建 DFGs，倘若是根据 CFG 来构造岂不是也会路径爆炸？</li>
+<li>2D-DFGs 里面有指针关系边，那么指针分析的精准性很重要</li>
+<li>本论文使用的案例：wu-ftpd，orzhttpd；它们都是可以采用不同的数据流缝合方式来完成攻击</li>
+</ol>
+
+      <div class="tags">
+          <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E6%94%BB%E5%87%BB/" rel="tag"><i class="ic i-tag"></i> 二进制安全，数据流攻击</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2023-09-15 16:02:12" itemprop="dateModified" datetime="2023-09-15T16:02:12+08:00">2023-09-15</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Tianyu Luo 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Tianyu Luo 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Tianyu Luo 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Tianyu Luo <i class="ic i-at"><em>@</em></i>学习之旅
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/09/08/flowstitch/" title="flowstitch">http://example.com/2023/09/08/flowstitch/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/09/08/hello-world/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclxfdlttj20zk0m8npd.jpg" title="Hello World">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> </span>
+  <h3>Hello World</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicitcxhpij20zk0m8hdt.jpg" title="Not All Data are Created Equal">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> DOP</span>
+  <h3>Not All Data are Created Equal</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#automatic-generation-of-data-oriented-exploits"><span class="toc-number">1.</span> <span class="toc-text"> Automatic Generation of Data-Oriented Exploits</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#abstract"><span class="toc-number">1.1.</span> <span class="toc-text"> Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-number">1.2.</span> <span class="toc-text"> Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#problem-definition"><span class="toc-number">1.3.</span> <span class="toc-text"> Problem Definition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#motivating-example"><span class="toc-number">1.3.1.</span> <span class="toc-text"> Motivating Example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#objectives-threat-model"><span class="toc-number">1.3.2.</span> <span class="toc-text"> Objectives &amp; Threat Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#problem-definition-2"><span class="toc-number">1.3.3.</span> <span class="toc-text"> Problem Definition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key-technique-challenges"><span class="toc-number">1.3.4.</span> <span class="toc-text"> Key Technique &amp; Challenges</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#data-flow-stitching"><span class="toc-number">1.4.</span> <span class="toc-text"> Data flow Stitching</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%BC%9D%E5%90%88%E6%8A%80%E5%B7%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 基础缝合技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%BC%9D%E5%90%88%E6%8A%80%E5%B7%A7"><span class="toc-number">1.4.2.</span> <span class="toc-text"> 高级缝合技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%8A%97aslr"><span class="toc-number">1.4.3.</span> <span class="toc-text"> 对抗 ASLR</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-flowstitch-system"><span class="toc-number">1.5.</span> <span class="toc-text"> The FLOWSTITCH System</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF%E5%BD%B1%E5%93%8D%E5%88%86%E6%9E%90%E6%9C%89%E7%82%B9%E6%8A%BD%E8%B1%A1"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 内存错误影响分析（有点抽象）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E8%AF%86%E5%88%AB"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 安全敏感数据识别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%9D%E5%90%88%E5%80%99%E9%80%89%E9%80%89%E6%8B%A9"><span class="toc-number">1.5.3.</span> <span class="toc-text"> 缝合候选选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%99%E9%80%89%E8%BF%87%E6%BB%A4"><span class="toc-number">1.5.4.</span> <span class="toc-text"> 候选过滤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.6.</span> <span class="toc-text"> 具体实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83"><span class="toc-number">1.7.</span> <span class="toc-text"> 思考</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/2023/09/08/flowstitch/" rel="bookmark" title="flowstitch">flowstitch</a></li><li><a href="/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/" rel="bookmark" title="Not All Data are Created Equal">Not All Data are Created Equal</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Tianyu Luo"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Tianyu Luo</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">3</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">1</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">2</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x1bzg5NzkwNjE=" title="https:&#x2F;&#x2F;github.com&#x2F;luo8979061"><i class="ic i-github"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>links</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2023/09/08/hello-world/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/DOP/" title="分类于 DOP">DOP</a>
+</div>
+
+    <span><a href="/2023/09/08/flowstitch/" title="flowstitch">flowstitch</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2023/09/08/hello-world/" title="Hello World">Hello World</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/DOP/" title="分类于 DOP">DOP</a>
+</div>
+
+    <span><a href="/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/" title="Not All Data are Created Equal">Not All Data are Created Equal</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Tianyu Luo @ Yume Shoka</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/09/08/flowstitch/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

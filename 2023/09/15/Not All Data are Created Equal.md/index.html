@@ -1,0 +1,640 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="学习之旅" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="学习之旅" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="学习之旅" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="二进制安全,DOP安全" />
+
+
+<link rel="canonical" href="http://example.com/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/">
+
+
+
+  <title>
+Not All Data are Created Equal - DOP |
+Yume Shoka = 学习之旅 = Learning journey</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Not All Data are Created Equal
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2023-09-15 16:57:14">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-09-15T16:57:14+08:00">2023-09-15</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Yume Shoka</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclgrvbd6j20zk0m8qv5.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipetfk5zwj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicmnywqgpj20zk0m8dwx.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeun65urj20zk0m81ii.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/DOP/" itemprop="item" rel="index" title="分类于 DOP"><span itemprop="name">DOP</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Tianyu Luo">
+    <meta itemprop="description" content="Learning journey, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="学习之旅">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="not-all-data-are-created-equal-data-and-pointer-prioritization-for-scalable-protection-against-data-oriented-attacks"><a class="markdownIt-Anchor" href="#not-all-data-are-created-equal-data-and-pointer-prioritization-for-scalable-protection-against-data-oriented-attacks">#</a> Not All Data are Created Equal: Data and Pointer Prioritization for Scalable Protection Against Data-Oriented Attacks</h1>
+<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要">#</a> 摘要</h2>
+<p>​		针对大多数操作系统中最先进的防御措施，面向数据的攻击变得越来越现实和有效。这些攻击操纵内存驻留数据对象（数据和指针），而不改变程序的控制流。由于对所有数据对象的过度检测，用于保护数据和指针的基于软件和硬件的对策遭受性能瓶颈。在这项工作中，我们提出了一个数据和指针优先级（DPP）框架，利用基于规则的启发式方法自动从应用程序中识别敏感内存对象，并利用现有对策仅保护那些敏感数据。我们使用 Linux Flaw Project 数据集、Juliet Test Suite 和五个真实程序（用于演示面向数据的攻击）来评估我们框架的正确性。我们的实验表明，DPP 可以通过优先考虑总数据对象的 3-4% 来识别我们测试的应用程序中易受攻击的数据对象。我们对 SPEC CPU2017 Integer 基准套件的评估表明，与默认 ASan 相比，DPPenabled AddressSanitizer (ASan) 可以将性能（在吞吐量方面）提高约 1.6 倍，并将运行时开销减少约 70%，同时保护所有优先数据对象。</p>
+<h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍">#</a> 介绍</h2>
+<ul>
+<li>
+<p>基于软件的对策：</p>
+<ul>
+<li>数据流完整性 (DFI)</li>
+<li>数据空间随机化 (DSR)</li>
+<li>内存标记技术</li>
+<li>缺陷：运行时开销大</li>
+</ul>
+</li>
+<li>
+<p>基于硬件的对策</p>
+<ul>
+<li>HDFI</li>
+<li>Intel 的控制流执行技术</li>
+<li>ARM 指针身份验证</li>
+<li>缺陷：仅限于某些平台，开销不可忽略</li>
+</ul>
+</li>
+<li>
+<p>本文的方法：通过 DPP 框架自动识别敏感数据对象并确定其优先级</p>
+<ul>
+<li>挑战
+<ul>
+<li>一套具有代表性、覆盖范围广泛的规则具有挑战性</li>
+<li>评估规则的准确性也具有挑战性</li>
+</ul>
+</li>
+<li>贡献
+<ul>
+<li>我们提出了一个适应性强且与平台或应用程序无关的 DPP 框架，用于自动识别敏感数据对象并对其进行优先级排序。我们定义了七种基于规则的启发式方法来进行识别和优先级排序。</li>
+<li>我们的评估表明，DPP 可以通过优先考虑总数据对象的 3-4% 来检测来自 Linux 缺陷项目 [19]、朱丽叶测试套件 [5,47] 和五个实际程序的易受攻击的数据对象</li>
+<li>我们通过 SPEC CPU2017 Integer 基准套件进行的性能评估表明，与 ASan（第 5.4 节）相比，DPP 在吞吐量方面将性能提高了约 1.6 倍，并将运行时间缩短了约 70%。我们的代码位于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NhbG1hbnlhbS9kcHAtbGx2bQ==">https://github.com/salmanyam/dpp-llvm</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="背景"><a class="markdownIt-Anchor" href="#背景">#</a> 背景</h2>
+<ul>
+<li>
+<p>Data-Oritented Attacks</p>
+<ul>
+<li>可以在完全精确的 “静态” CFI 存在的情况下帮助控制数据攻击或实现图灵完备的表达能力</li>
+<li>DOA 的关键是对两种数据的策略操作：i) 数据变量或对象，以及 ii) 数据指针
+<ul>
+<li>覆盖安全关键数据变量或对象会导致程序行为改变或无意的数据泄漏</li>
+<li>覆盖数据指针即可实现 DOP，实现图灵完备的攻击</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>DOA 的防御手段</p>
+<ul>
+<li>
+<p>pointer-based，bound-checking ，object-based bound checking ，pointer integrity，DFI</p>
+<p>，DSR，YARRA , PT-Rand ,Orpheus</p>
+</li>
+<li>
+<p>高运行时开销，大多数这些保护机制通常不适用于保护内存驻留数据对象</p>
+</li>
+<li>
+<p>因此，有必要对敏感数据对象进行识别并确定优先级，以改进这些保护机制并使其实用化</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="data-and-pointer-prioritization"><a class="markdownIt-Anchor" href="#data-and-pointer-prioritization">#</a> Data and Pointer Prioritization</h2>
+<ul>
+<li>
+<p>敏感数据对象</p>
+<ul>
+<li>攻击者可以通过外部操作进行控制</li>
+<li>允许攻击者更改程序流程或选择执行路径</li>
+</ul>
+</li>
+<li>
+<p>两个主要操作</p>
+<p>1） 污点跟踪以识别可能由攻击者控制的数据对象</p>
+<ul>
+<li>外部源（例如网络、文件系统或用户输入）接收输入的系统或库 I/O 函数作为初始污点源</li>
+</ul>
+<p>2） 检测并确定对象的优先级</p>
+</li>
+</ul>
+<h3 id="基于规则的优先级"><a class="markdownIt-Anchor" href="#基于规则的优先级">#</a> 基于规则的优先级</h3>
+<p>​	    DPP 使用基于规则的启发式方法自动检测可能导致漏洞的敏感数据对象，基于至少 9 个面向数据的漏洞利用  和 20 个 CVE 披露，将内存破坏的类型分为四类：i）控制更改 - 数据对象及其指针的损坏旨在改变程序行为，ii）基于邻近性 - 指针旨在损坏附近的缓冲区，iii）错误 - 其中数据指针的转换错误，违反了预期的指针语义，并导致内存损坏；或者数据对象有错误的边界条件，以及 iv) 无保护 —— 指针被分配为无边界，七种启发式规则如下：</p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230826182806031.png" alt="image-20230826182806031"></p>
+<h3 id="数据流跟踪"><a class="markdownIt-Anchor" href="#数据流跟踪">#</a> 数据流跟踪</h3>
+<p>目的：识别所有攻击者控制的数据（即来自外部输入的所有可访问数据）并污染它们。</p>
+<p>方法：利用过程间 SVF 对 LLVM  IR 进行分析，以构建静态值流图 (SVFG)</p>
+<h3 id="污点分析"><a class="markdownIt-Anchor" href="#污点分析">#</a> 污点分析</h3>
+<p>目的：识别程序中的所有污点来源，并考虑简单和复杂的污点传播场景，在整个程序中传播污点</p>
+<p>方法：1. 首先识别受污染的来源（一般来自网络、文件系统或用户输入），包括标准库函数，例如 read、recv、getc、recvmsg、scanf、fscanf、fread 和 fgets，以及标准库中的输入函数的常见包装函数。</p>
+<p>​		   2. 通过遍历受污染节点的所有后继节点来通过 SVFG 传播污染</p>
+<p>同时，需要解决 SVFG 的以下限制：</p>
+<ol>
+<li>
+<p>当传递给分配器的参数被污染时，SVFG 不会污染动态分配的内存。</p>
+</li>
+<li>
+<p>当指针使用受污染的值或受污染输入的指针算术结果进行索引时，SVFG 不会污染底层对象。</p>
+</li>
+<li>
+<p>SVFG 不会跟踪函数（例如 memcpy）何时将一个参数的值存储到另一个参数</p>
+</li>
+</ol>
+<h2 id="评估"><a class="markdownIt-Anchor" href="#评估">#</a> 评估</h2>
+<ol>
+<li>
+<p>DPP 对安全关键数据对象进行优先级排序的能力如何？</p>
+<ul>
+<li>具有 DPP 的 ASan 可以像默认 ASan 一样检测两个数据集中的所有内存错误。然而，具有 DPP 的 ASan 可以通过仅保护优先数据对象来检测内存错误。此评估展示了 DPP 对安全关键数据对象进行优先级排序的能力</li>
+</ul>
+</li>
+<li>
+<p>DPP 对敏感数据对象进行排名的效率如何？个别规则对优先级排序的准确性有什么影响？</p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230827165427541.png" alt="image-20230827165427541"></p>
+</li>
+<li>
+<p>剩余数据对象有多敏感？</p>
+<ul>
+<li>通过案例分析 ghttpd-1.4 和 nullhttpd-0.5.0，DPP 未优先考虑的数据对象确实不敏感</li>
+</ul>
+</li>
+<li>
+<p>DPP 可以实现多少性能提升？DPP 的最终结果如何适合实施实际保护？</p>
+<ul>
+<li>
+<p>启用 DPP 的 ASan 相比默认的 ASan，性能提高了 1.6 倍，开销减少了 30%</p>
+</li>
+<li>
+<p>启用 DPP 的 ASan 相比默认的 ASan，运行时间开销减少了约 70%</p>
+</li>
+<li>
+<p>实际应用程序的性能改进</p>
+<p><img data-src="https://blog-lty.oss-cn-beijing.aliyuncs.com/img/image-20230827170909581.png" alt="image-20230827170909581"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结">#</a> 总结</h2>
+<p>​		在本文中，作者提出了一种自动优先级框架，用于识别和保护敏感的内存驻留数据对象，以防止面向数据的攻击。总体结果表明，简单的基于规则的启发式方法是有效的。我们的漏洞利用和漏洞驱动的基于规则的启发式方法可以在必要时灵活地添加新规则。使用 Linux Flaw Project [19]、Juliet Test Suite [5, 47] 和实际程序进行的实验评估表明，可以成功识别易受攻击的数据对象。与 ASan 相比，DPP 将性能提高了 ∼1.6 倍，并将运行时开销降低了 70%。作者认为并非应用程序中的所有数据对象都需要保护，我们可以对它们进行优先级排序。这种提出的优先级方案是新的，使我们的方法不同于传统的保护范例。</p>
+<h2 id="参考文献"><a class="markdownIt-Anchor" href="#参考文献">#</a> 参考文献</h2>
+<ul>
+<li>DOA 概念
+<ul>
+<li>Non-Control-Data Attacks Are Realistic Threats （DOA 概念首次提出）</li>
+<li>Exploitation techniques for data-oriented attacks with existing and potential defense approaches（DOA 的系统化）</li>
+<li>Exploitation techniques and defenses for data-oriented attacks（DOA 的系统化）</li>
+</ul>
+</li>
+<li>DOA 在服务器应用程序的应用
+<ul>
+<li>Automatic generation of data-oriented exploits</li>
+<li>Data-oriented programming: On the expressiveness of non-control data attacks</li>
+<li>Security risks in asynchronous web servers: When performance optimizations amplify the impact of data-oriented attacks</li>
+</ul>
+</li>
+<li>DOA 在浏览器的应用
+<ul>
+<li>“the web/local” boundary is fuzzy: A security study of chrome’s process-based sandboxing</li>
+<li>Revisiting browser security in the modern era: New data-only attacks and defenses</li>
+</ul>
+</li>
+<li>自动化的 DOA 的攻击生成
+<ul>
+<li>Automatic generation of data-oriented exploits （FLOWSTITCH）</li>
+<li>Block Oriented Programming: Automating Data-Only Attacks (BOPC)</li>
+<li>STEROIDS for DOPed Applications: A Compiler for Automated Data-Oriented<br>
+Programming (STERROIDS)</li>
+<li>A Generic Technique for Automatically Finding Defense-Aware Code Reuse At-<br>
+tacks (LIMBO)</li>
+</ul>
+</li>
+<li>其他
+<ul>
+<li>COOP（Counterfeit object-oriented programming: On the difficulty of preventing code reuse attacks in C++ applications） 利用 C<ins> 对象劫持 C</ins> 对象的虚拟表指针，并使用虚拟函数作为 gadget 构建了一个漏洞利用程序</li>
+<li>基于堆的漏洞利用（例如 Glibc 上的 House of Spirit 攻击 （how2heap.<br>
+<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NoZWxscGhpc2gvaG93MmhlYXAlRUYlQkMlODklRUYlQkMlODklRTQlQjklOUYlRTQlQkMlOUElRTYlOTMlOEQlRTclQkElQjU=">https://github.com/shellphish/how2heap））也会操纵</span> malloc () 返回的数据指针</li>
+</ul>
+</li>
+</ul>
+
+      <div class="tags">
+          <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-DOP%E5%AE%89%E5%85%A8/" rel="tag"><i class="ic i-tag"></i> 二进制安全,DOP安全</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2023-09-15 17:04:42" itemprop="dateModified" datetime="2023-09-15T17:04:42+08:00">2023-09-15</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Tianyu Luo 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Tianyu Luo 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Tianyu Luo 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Tianyu Luo <i class="ic i-at"><em>@</em></i>学习之旅
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/" title="Not All Data are Created Equal">http://example.com/2023/09/15/Not All Data are Created Equal.md/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/09/08/flowstitch/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeubcbajj20zk0m8h1h.jpg" title="flowstitch">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> DOP</span>
+  <h3>flowstitch</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#not-all-data-are-created-equal-data-and-pointer-prioritization-for-scalable-protection-against-data-oriented-attacks"><span class="toc-number">1.</span> <span class="toc-text"> Not All Data are Created Equal: Data and Pointer Prioritization for Scalable Protection Against Data-Oriented Attacks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text"> 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.3.</span> <span class="toc-text"> 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#data-and-pointer-prioritization"><span class="toc-number">1.4.</span> <span class="toc-text"> Data and Pointer Prioritization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E8%A7%84%E5%88%99%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 基于规则的优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E8%B7%9F%E8%B8%AA"><span class="toc-number">1.4.2.</span> <span class="toc-text"> 数据流跟踪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%A1%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">1.4.3.</span> <span class="toc-text"> 污点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0"><span class="toc-number">1.5.</span> <span class="toc-text"> 评估</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.6.</span> <span class="toc-text"> 总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.7.</span> <span class="toc-text"> 参考文献</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2023/09/08/flowstitch/" rel="bookmark" title="flowstitch">flowstitch</a></li><li class="active"><a href="/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/" rel="bookmark" title="Not All Data are Created Equal">Not All Data are Created Equal</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Tianyu Luo"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Tianyu Luo</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">3</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">1</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">2</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x1bzg5NzkwNjE=" title="https:&#x2F;&#x2F;github.com&#x2F;luo8979061"><i class="ic i-github"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>links</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/DOP/" title="分类于 DOP">DOP</a>
+</div>
+
+    <span><a href="/2023/09/15/Not%20All%20Data%20are%20Created%20Equal.md/" title="Not All Data are Created Equal">Not All Data are Created Equal</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/DOP/" title="分类于 DOP">DOP</a>
+</div>
+
+    <span><a href="/2023/09/08/flowstitch/" title="flowstitch">flowstitch</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2023/09/08/hello-world/" title="Hello World">Hello World</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Tianyu Luo @ Yume Shoka</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/09/15/Not All Data are Created Equal.md/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
